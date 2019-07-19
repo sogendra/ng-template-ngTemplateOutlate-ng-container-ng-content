@@ -1,0 +1,9 @@
+<ng-template #defaultTabButtons>
+    <div class="default-tab-buttons">
+        <p>
+            Please provide Input data to display it here.
+        </p>
+    </div>    
+</ng-template>
+
+<ng-container *ngTemplateOutlet="headerTemplate ? headerTemplate: defaultTabButtons"></ng-container>

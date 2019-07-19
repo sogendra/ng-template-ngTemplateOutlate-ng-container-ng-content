@@ -1,0 +1,76 @@
+<!-- This is how we can use <ng-template>'s content using *ngTemplateOutlet structural directive -->
+<h3>Example of "ng-content","ng-template" & "*ngTemplateOutlet" </h3>
+
+<ng-container *ngTemplateOutlet="testingTemplate"></ng-container>
+
+<p>Hey, guys</p>
+<p>This is Sogendra.</p>
+<!-- Example of <ng-content> -->
+<!-- We can use it to pass tags between our component's selector -->
+<ng-content></ng-content>
+<p>etc..</p>
+
+
+<!-- Example of <ng-template>  -->
+<!-- <ng-template> won't appear directly in the dom we can use this code snipet by using *ngTemplateOutlet structural directive -->
+<ng-template #testingTemplate>
+  <p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla eos deleniti voluptas, 
+    non veniam voluptatibus.
+  </p>
+</ng-template>
+
+<!-- Example of <ng-container>  -->
+<!-- Without <ng-container>  not able to use span or any tags because select don't allow any other tags insted of option directly-->
+  
+<h3>Example of "ng-container" </h3>
+
+<div>
+    Pick your favorite hero
+</div>
+<select>
+  <span *ngFor="let h of heroes">
+      <option [ngValue]="h">{{h}} </option>
+  </span>
+</select>
+
+<!-- We can solve above problem using <ng-container> -->
+<div>
+    Pick your favorite hero
+</div>
+<select>
+  <ng-container *ngIf="heroes">
+    <ng-container *ngFor="let h of heroes">
+      <option [ngValue]="h">{{h}} </option>
+    </ng-container>
+  </ng-container>
+</select>
+
+
+
+<!-- Example of <ng-template> Context -->
+  <!-- Use to declare ng-template specific variables which are only accessible inside ng-template -->
+<h3>Example of "ng-template" with context </h3>
+
+<ng-template #estimateTemplate let-lessonsCounter="estimate">
+    <div> Approximately {{lessonsCounter}} lessons ...</div>
+</ng-template>
+
+<ng-container 
+   *ngTemplateOutlet="estimateTemplate;context:ctx">
+</ng-container>
+
+<br>
+
+<!-- Example of Passing ng-template as Input  -->
+<h3>Example of Passing "ng-template" as Input </h3>
+<ng-template #defaultTabButtons>
+    <button class="tab-button" (click)="onClick()">
+      {{clickMe}}
+    </button>
+    <p>
+      {{displayMessage}}
+    </p>
+</ng-template>
+
+<app-content-child  [headerTemplate]="defaultTabButtons"></app-content-child>
